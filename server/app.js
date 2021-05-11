@@ -9,11 +9,6 @@ const app = express();
 const httpServer = http.createServer(app);
 env.config();
 const PORT = process.env.PORT || 9708;
-var corsOptions = {
-    origin: process.env.SOURCE_ORIGIN,
-    optionsSuccessStatus: 200,
-    methods: "GET"
-}
 app.use(cors());
 
 app.use('/news', newsRouter);
