@@ -1,6 +1,5 @@
 import express from 'express';
 import fs from 'fs';
-import axios from 'axios';
 const dataRouter = express.Router();
 const dataPathCateogry = './constants/category.json';
 const dataPathSortOptions = './constants/country.json';

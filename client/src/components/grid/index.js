@@ -4,6 +4,7 @@ import CustomAutoComplete from '../../components/combo';
 import CustomSearchField from '../../components/searchfield';
 import NewsItem from '../../components/newsitem';
 import BaseService from '../../service/BaseService';
+import DataLabels from './constants.js';
 import './style.css';
 import loadingLogo from './spinner.gif';
 const Grid = (props) =>{
@@ -119,7 +120,7 @@ const Grid = (props) =>{
                 {(loading) ? (<img src={loadingLogo} className="loader"/>) : 
                     (
                         <div className="news">
-                            {newsItems.length? newsItems : "No results matched"}
+                            {newsItems.length? newsItems : DataLabels.EMPTY_TEXT}
                         </div>
                     )}
                 {(loading || !newsItems.length) ?"":<CustomPagination handleChange={handlePaginationChange} noOfPages={info.noOfPages} page={info.currentPage}/>}
