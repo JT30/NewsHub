@@ -1,0 +1,16 @@
+.comboInnerElement{
+    width: 150px;
+    padding-top: 20px;
+}
+.MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] {
+    padding: 0px  !important;
+}
+.MuiInputLabel-outlined {
+    margin: -8px;
+}
+@media (max-width: 720px) {
+    .comboInnerElement{
+        padding-left: 20px;
+        padding-top: 0px;
+    }
+}

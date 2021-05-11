@@ -1,0 +1,25 @@
+[{
+    "id" : "all",
+    "text" : "All"
+},{
+    "id" : "business",
+    "text" : "Business"
+},{
+    "id" : "entertainment",
+    "text" : "Entertainment"
+},{
+    "id" : "general",
+    "text" : "General"
+},{
+    "id" : "health",
+    "text" : "Health"
+},{
+    "id" : "science",
+    "text" : "Science"
+},{
+    "id" : "sports",
+    "text" : "Sports"
+},{
+    "id" : "technology",
+    "text" : "Technology"
+}]

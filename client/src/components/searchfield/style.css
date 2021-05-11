@@ -1,0 +1,17 @@
+:root{
+    --borderColor : #c7c7ca;
+}
+.searchField{
+    width: 70%;
+    margin: 20px;
+    border-radius: 2px;
+    border: 1.5px solid var(--borderColor)!important;
+}
+.react-search-field-input{
+    height: 20% !important;
+}
+@media (max-width: 720px) {
+    .searchField{      
+        width: 90%;
+    }
+}
