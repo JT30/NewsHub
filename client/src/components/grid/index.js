@@ -11,6 +11,7 @@ const Grid = (props) =>{
     const {category} = props;
     const recordsPerPage = 10;
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
     const [info, setInfo] = useState({
         currentPage : 1,
         noOfPages : 0,
@@ -18,6 +19,17 @@ const Grid = (props) =>{
         searchText : null,
         country : null
     });
+    const errorFunction = (error) =>{
+        let msg = error.data && error.data.message ? error.data.message :DataLabels.GENERAL_ERROR;
+        setLoading(false);
+        setError(msg);
+        setInfo(Object.assign({},info,{newsData : []}));
+    };
+    const successCallback = (json)=>{
+        setInfo(Object.assign({},info,json));
+        setLoading(false);
+        setError(false);
+    };
     useEffect(()=>{
         setLoading(true);
         BaseService.fetchNewsData({
@@ -27,19 +39,15 @@ const Grid = (props) =>{
             searchText : info.searchText,
             country : info.country
         }).then((data) => {
-            let json = {
+            successCallback({
                 newsData : data.articles,
                 noOfPages : BaseService.calCulateNoOfPages({
                     totalRecords : data.totalResults,
                     recordsPerPage : recordsPerPage
                 })
-            };
-            setInfo(Object.assign({},info,json));
-            setLoading(false);
+            });
         })
-        .catch(e => {
-            console.log("error", e);
-        });
+        .catch(errorFunction);
     },[category]); 
     const searchFieldChange = (text) =>{
         let encodedText = encodeURIComponent(text);
@@ -51,20 +59,16 @@ const Grid = (props) =>{
             category : category,
             country : info.country
         }).then((data) => {
-            let json = {
+            successCallback({
                 newsData : data.articles,
                 noOfPages : BaseService.calCulateNoOfPages({
                     totalRecords : data.totalResults,
                     recordsPerPage : recordsPerPage
                 }),
                 searchText : encodedText
-            };
-            setInfo(Object.assign({},info,json)); 
-            setLoading(false);
+            });
         })
-        .catch(e => {
-            console.log("error", e);
-        });
+        .catch(errorFunction);
     };
     const handlePaginationChange = (event, page) => {
         setLoading(true);
@@ -75,16 +79,12 @@ const Grid = (props) =>{
             searchText : info.searchText,
             country : info.country
         }).then((data) => {  
-            let json = {
+            successCallback({
                 newsData : data.articles,
                 currentPage : page
-            };                   
-            setInfo(Object.assign({},info,json));  
-            setLoading(false);
+            });           
         })
-        .catch(e => {
-            console.log("error", e);
-        });
+        .catch(errorFunction);
     };
     const countryChangeHandler = (event, object) =>{
         setLoading(true);
@@ -95,39 +95,32 @@ const Grid = (props) =>{
             searchText : info.searchText,
             country : object ? object.id :null
         }).then((data) => {  
-            let json = {
+            successCallback({
                 newsData : data.articles,
                 noOfPages : BaseService.calCulateNoOfPages({
                     totalRecords : data.totalResults,
                     recordsPerPage : recordsPerPage
                 }),
                 country : object ? object.id :null
-            };                   
-            setInfo(Object.assign({},info,json));  
-            setLoading(false);
+            });          
         })
-        .catch(e => {
-            console.log("error", e);
-        });
+        .catch(errorFunction);
     };
     let newsItems = info.newsData.map((newsItemDetails, index) => <NewsItem key={index} details={newsItemDetails}/>);
     return (
-            <div className="main">
-                <div className="header">
-                    <CustomSearchField onChange={searchFieldChange}/>   
-                    <CustomAutoComplete countryChangeHandler={countryChangeHandler}/>                 
-                </div> 
-                {(loading) ? (<img src={loadingLogo} className="loader"/>) : 
-                    (
-                        <div className="news">
-                            {newsItems.length? newsItems : DataLabels.EMPTY_TEXT}
-                        </div>
-                    )}
-                {(loading || !newsItems.length) ?"":<CustomPagination handleChange={handlePaginationChange} noOfPages={info.noOfPages} page={info.currentPage}/>}
-            </div>
-            
-            
-        
+        <div className="main">
+            <div className="header">
+                <CustomSearchField onChange={searchFieldChange}/>   
+                <CustomAutoComplete countryChangeHandler={countryChangeHandler}/>                 
+            </div> 
+            {(loading) ? (<img src={loadingLogo} className="loader"/>) : 
+                (
+                    <div className="news">
+                        {newsItems.length? newsItems : error ? (<span className="error">{error}</span>) : DataLabels.EMPTY_TEXT}
+                    </div>
+                )}
+            {(loading || !newsItems.length) ?"":<CustomPagination handleChange={handlePaginationChange} noOfPages={info.noOfPages} page={info.currentPage}/>}
+        </div>
     )
 }
 export default Grid;

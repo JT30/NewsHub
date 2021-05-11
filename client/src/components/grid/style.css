@@ -14,6 +14,9 @@
 .news{
     overflow-y: scroll;
 }
+.error{
+    color: var(--errorColor);
+}
 .loader{
     width : 10%;
     height : 10%;
