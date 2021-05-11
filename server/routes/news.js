@@ -30,9 +30,10 @@ newsRouter.get('/',(req, res) => {
         .then(response => {
             res.send(response);
       }).catch(e => {
-        res.status(400).send({
-            message: 'Internal Error'
-         });
+          console.log(e);
+        res.status(400).json({ 
+            message: "Could not fetch data since the limit is exceeded"
+        });
     });;      
 });
 

@@ -46,8 +46,8 @@ const request = (options) => {
         axios(config).then(function (response) {
             resolve(response.data)
         })
-        .catch((err) => {
-            console.log(err);
+        .catch((error) => {            
+            reject(error.response);
         });
     });    
 };
