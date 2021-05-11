@@ -1,0 +1,32 @@
+.main {
+    background: var(--mainContent);
+    height: 96%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;   
+    margin-top: 2rem;
+    margin-right: 2rem;
+}
+.header{    
+    display: flex;
+    flex-direction: row;  
+}
+.news{
+    overflow-y: scroll;
+}
+.loader{
+    width : 10%;
+    height : 10%;
+    margin-top: 35%;
+    margin-left: 45%;
+}
+@media (max-width: 720px) {
+    .main{      
+        width: 100%;
+    }
+    .header{
+        flex-direction: column;  
+    }
+}
+
+  

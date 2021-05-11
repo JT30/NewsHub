@@ -1,0 +1,13 @@
+:root{
+    --paginationHighLightColor: #c7c8d8;
+}
+.paginationBar{
+    display: inline-block;
+}
+.paginationMain{
+    padding: 15px;
+}
+.MuiPaginationItem-page.Mui-selected{
+    background-color: var(--paginationHighLightColor) !important;
+    font-weight: 500;
+}

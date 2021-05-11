@@ -1,0 +1,66 @@
+:root {
+  --blue: #032a63;
+  --backgroundBase : #e6e7e8;
+  /* --mouseOverTextColor : #000000; */
+  --mainTitle : #ffffff;
+  --mainContent : #ffffff;
+  --newsContentColor : #3a3a3a;
+  --scrollbarTrack : #d8d8d8;
+  --srollbarThumb : #ababac;;
+  --scrollbarThumbHover : #555;
+  --fontFamily: sans-serif;
+}
+
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  background-color: var( --backgroundBase);
+  align-items: center;
+  justify-content: center;
+  overflow-y: scroll;
+}
+
+.App-header {
+  background-color: var(--blue);
+    min-height: 10vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: var(--mainTitle);
+    font-weight: bold;
+    padding-left: 30px;
+    box-sizing: border-box;
+}
+.Content {
+  background-color: var( --backgroundBase);
+  height : 90vh;
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbarTrack);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--srollbarThumb);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbarThumbHover);
+}
+@media (min-width: 1200px) {
+  .Content {
+    max-width: 1140px;
+  }
+}
+@media (max-width: 720px) {
+  .Content{      
+    flex-direction: column;
+  }
+}
